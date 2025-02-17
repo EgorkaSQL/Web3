@@ -13,19 +13,15 @@ public class PointEntity {
     private double y;
     private double r;
     private boolean status;  // Поле для статуса попадания
-    private boolean hit;     // Поле для попадания в зону
 
     // Конструкторы
-    public PointEntity() {
-        this.hit = false;  // Значение по умолчанию
-    }
+    public PointEntity() {}
 
-    public PointEntity(double x, double y, double r, boolean status, boolean hit) {
+    public PointEntity(double x, double y, double r, boolean status) {
         this.x = x;
         this.y = y;
         this.r = r;
         this.status = status;
-        this.hit = hit;
     }
 
     // Геттеры и сеттеры
@@ -67,13 +63,5 @@ public class PointEntity {
 
     public void setStatus(boolean status) {
         this.status = status;
-    }
-
-    public boolean getHit() {
-        return hit;
-    }
-
-    public void setHit(boolean hit) {
-        this.hit = hit;
     }
 }

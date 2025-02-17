@@ -5,7 +5,7 @@ public class PointMapper {
 
     // Преобразование DTO в сущность
     public PointEntity toEntity(PointDTO dto) {
-        return new PointEntity(dto.getX(), dto.getY(), dto.getR(), dto.isStatus(), false);  // hit по умолчанию false
+        return new PointEntity(dto.getX(), dto.getY(), dto.getR(), dto.isStatus());  // Убираем hit
     }
 
     // Преобразование сущности в DTO
@@ -13,3 +13,4 @@ public class PointMapper {
         return new PointDTO(entity.getX(), entity.getY(), entity.getR(), entity.getStatus());  // Учитываем статус из сущности
     }
 }
+
