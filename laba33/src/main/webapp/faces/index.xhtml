@@ -1,0 +1,97 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+    <meta charset="UTF-8"/>
+    <title>Лабораторная 3 - Веб-программирование</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            background-color: #590b9c;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            width: 700px;
+            text-align: center;
+        }
+
+        .header {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .link-to-main-page {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #8d49e4;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .link-to-main-page:hover {
+            background-color: #5c24d4;
+        }
+
+        .time {
+            font-size: 1.4rem;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .time span {
+            display: inline-block;
+            padding: 10px 15px;
+            font-size: 1.2rem;
+            background: #fff;
+        }
+    </style>
+</h:head>
+
+<h:body>
+    <div class="container">
+        <div class="header">
+            Кондилеев Егор Юрьевич P3210 488793
+        </div>
+        <h:link styleClass="link-to-main-page" value="Программа" outcome="main" />
+        <div class="time" id="time"></div>
+    </div>
+
+    <h:outputScript target="body">
+        (function() {
+            function formatTime(date) {
+                const optionsDate = { day: '2-digit', month: '2-digit', year: 'numeric' };
+                const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+                return date.toLocaleDateString('ru-RU', optionsDate) + ' ' + date.toLocaleTimeString('ru-RU', optionsTime);
+            }
+
+            function updateTime() {
+                const timeElement = document.getElementById('time');
+                if (!timeElement) return;
+                const now = new Date();
+                timeElement.innerHTML = formatTime(now);
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                updateTime();
+                setInterval(updateTime, 13000);
+            });
+        })();
+    </h:outputScript>
+</h:body>
+</html>

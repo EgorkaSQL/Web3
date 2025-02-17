@@ -1,0 +1,274 @@
+<html lang="en"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <meta charset="UTF-8"/>
+    <title>Лабораторная 3 Веб - Программа</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com"/>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Pixelify Sans", sans-serif;
+        }
+
+        body {
+            background-color: #590b9c;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            background-color: #360760;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .left-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .variables {
+            font-size: 20px;
+            background-color: #ffffff;
+            padding: 20px;
+            width: 100%;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form label {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .form input, .form select {
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+        }
+
+        .form button {
+            padding: 10px;
+            font-size: 16px;
+            background-color: #8d49e4;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form button:hover {
+            background-color: #7a3ad1;
+        }
+
+        .tableContainer {
+            width: 100%;
+            overflow-x: auto;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .tableCorner {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .tableCorner th {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #000;
+            text-align: center !important;
+            vertical-align: middle !important;
+            background-color: #590b9c;
+            color: white;
+        }
+
+        body .ui-datatable thead th {
+            background-color: #590b9c !important;
+            color: white !important;
+            text-align: center !important;
+            vertical-align: middle !important;
+        }
+
+        .tableCorner td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #000;
+        }
+
+        .greatCanvas {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .canvasContainer {
+            width: 400px;
+            height: 400px;
+            position: relative;
+            background-color: #ffffff;
+        }
+
+        canvas {
+            border: 1px solid #000;
+        }
+
+        #canvas {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        #pointsCanvas {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 5px;
+            background-color: #8d49e4;
+            color: #fff;
+            border-radius: 0;
+            cursor: pointer;
+            width: 400px;
+            text-align: center;
+        }
+
+        .link-to-main-page {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #8d49e4;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            border: none;
+            width: 100%;
+            text-align: center;
+        }
+
+        .link-to-main-page:hover {
+            background-color: #5c24d4;
+        }
+
+        .rselection {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .rselection input[type="radio"] {
+            margin-right: 5px;
+        }
+    </style>
+</h:head>
+
+<h:body>
+    <div class="container">
+        <div class="left-panel">
+            <h:form>
+                <div class="variables">
+                    <div class="form" id="form">
+                        <label for="x">
+                            <p>Выберите X координату:</p>
+                            <h:selectOneRadio id="x" value="#{pointBean.x}" styleClass="xSelection">
+                                <f:selectItem itemValue="-4" itemLabel="-4" />
+                                <f:selectItem itemValue="-3" itemLabel="-3" />
+                                <f:selectItem itemValue="-2" itemLabel="-2" />
+                                <f:selectItem itemValue="-1" itemLabel="-1" />
+                                <f:selectItem itemValue="0" itemLabel="0" />
+                                <f:selectItem itemValue="1" itemLabel="1" />
+                                <f:selectItem itemValue="2" itemLabel="2" />
+                            </h:selectOneRadio>
+                        </label>
+
+                        <label for="ySelection">
+                            <p>Введите Y координату (-3...3)</p>
+                            <h:inputText id="ySelection" class="ySelection" value="#{pointBean.y}" required="true" placeholder="-3...5">
+                                <f:validateDoubleRange minimum="-3" maximum="3" />
+                            </h:inputText>
+                        </label>
+
+                        <label for="rSelection">
+                            <p>Выберете R</p>
+                            <h:selectOneMenu id="rSelection" class="rselection" value="#{pointBean.r}" style="font-size: 16px;">
+                                <f:selectItem itemValue="1" itemLabel="1" />
+                                <f:selectItem itemValue="2" itemLabel="2" />
+                                <f:selectItem itemValue="3" itemLabel="3" />
+                                <f:selectItem itemValue="4" itemLabel="4" />
+                                <f:selectItem itemValue="5" itemLabel="5" />
+                            </h:selectOneMenu>
+                        </label>
+
+                        <h:commandButton value="Отправить" onclick="return processButtons()" action="#{pointBean.submit()}" class="submitButton">
+                            <f:ajax render="table" execute="@form" />
+                        </h:commandButton>
+                    </div>
+                </div>
+            </h:form>
+            <div class="tableContainer">
+                <p:dataTable value="#{pointBean.points}" emptyMessage="" var="point" id="table" styleClass="tableCorner" update="@form">
+                    <p:column headerText="X">
+                        <h:outputText value="#{point.x}" />
+                    </p:column>
+                    <p:column headerText="Y">
+                        <h:outputText value="#{point.y}" />
+                    </p:column>
+                    <p:column headerText="R">
+                        <h:outputText value="#{point.r}" />
+                    </p:column>
+                    <p:column headerText="Результат">
+                        <h:outputText value="#{point.status ? 'Попадание' :  'Промах'}" style="color: #{point.status ? 'green' : 'red'}" />
+                    </p:column>
+                </p:dataTable>
+            </div>
+            <status class="status">
+            </status>
+        </div>
+        <div class="greatCanvas">
+            <div class="canvasContainer">
+                <canvas width="400" height="400" id="canvas"></canvas>
+                <canvas width="400" height="400" id="pointsCanvas"></canvas>
+            </div>
+            <header>
+                <h:link styleClass="link-to-main-page" value="Главная" outcome="index" />
+            </header>
+        </div>
+    </div>
+
+    <script src="../js/canvas.js"></script>
+    <script src="../js/script.js"></script>
+</h:body>
+</html>
