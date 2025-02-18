@@ -12,9 +12,8 @@ public class PointEntity {
     private double x;
     private double y;
     private double r;
-    private boolean status;  // Поле для статуса попадания
+    private boolean status;
 
-    // Конструкторы
     public PointEntity() {}
 
     public PointEntity(double x, double y, double r, boolean status) {
@@ -24,7 +23,6 @@ public class PointEntity {
         this.status = status;
     }
 
-    // Геттеры и сеттеры
     public Long getId() {
         return id;
     }

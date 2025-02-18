@@ -1,6 +1,3 @@
-networks:
-  it-mo:
-
 volumes:
   pgdata:
 
@@ -13,8 +10,6 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: mydb
-    networks:
-      - it-mo
 
   wildfly:
     build:
@@ -28,5 +23,3 @@ services:
       - POSTGRESQL_DATABASE=mydb
     depends_on:
       - database
-    networks:
-      - it-mo

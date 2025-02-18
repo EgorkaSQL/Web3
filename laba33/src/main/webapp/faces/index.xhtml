@@ -68,14 +68,10 @@
             Кондилеев Егор Юрьевич P3210 488793
         </div>
         <h:link styleClass="link-to-main-page" value="Программа" outcome="main" />
-
-        <!-- Обновление времени с использованием p:poll -->
         <div class="time">
             <h:outputText value="#{timeBean.currentTime}" id="time" />
         </div>
-
-        <!-- PrimeFaces poll для обновления времени каждую секунду -->
-        <p:poll interval="1" listener="#{timeBean.updateTime}" update="time" />
+        <p:poll interval="11" listener="#{timeBean.updateTime}" update="time" />
     </div>
 </h:body>
 </html>

@@ -14,11 +14,12 @@ public class PointBean {
     @Inject
     private DatabaseService databaseService;
 
+    @Inject
+    private SessionPointBean sessionPointBean;
+
     private double x;
     private double y;
     private double r;
-
-    private List<PointDTO> points;
 
     // Getters and Setters
     public double getX() {
@@ -46,19 +47,17 @@ public class PointBean {
     }
 
     public List<PointDTO> getPoints() {
-        return points;
+        return sessionPointBean.getPoints();
     }
 
     public String submit() {
         PointDTO pointDTO = new PointDTO(x, y, r, false);
-
-        // Проверяем попадание в область R
         if (pointService.validatePoint(pointDTO)) {
             boolean hit = pointService.isPointInArea(pointDTO);
             pointDTO.setStatus(hit);
 
             databaseService.addPoint(pointDTO);
-            points = databaseService.getAllPoints();
+            sessionPointBean.addPoint(pointDTO);
         }
 
         return "success";
@@ -66,6 +65,6 @@ public class PointBean {
 
     public void clear() {
         databaseService.clearPoints();
-        points.clear(); // Очистка списка точек
+        sessionPointBean.clearPoints();
     }
 }

@@ -2,7 +2,7 @@ public class PointDTO {
     private double x;
     private double y;
     private double r;
-    private boolean status;  // Поле для статуса попадания
+    private boolean status;
 
     // Конструкторы
     public PointDTO(double x, double y, double r, boolean status) {
@@ -12,7 +12,6 @@ public class PointDTO {
         this.status = status;
     }
 
-    // Геттеры и сеттеры
     public double getX() {
         return x;
     }

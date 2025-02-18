@@ -47,11 +47,7 @@ document.querySelectorAll('.rSelection input').forEach(radio => {
 
 document.addEventListener("DOMContentLoaded", () => {
     const rSelectionElement = document.querySelector('.rSelection');
-
-    // Устанавливаем значение R по умолчанию, например, 1
     R = Number(rSelectionElement.querySelector('input:checked')?.value || 1);
-
-    // Отображаем фигуры сразу при загрузке страницы
     drawGraph();
 });
 
@@ -121,11 +117,11 @@ function processButtons() {
 function handleResult(xValue, yValue, rValue) {
     setTimeout(() => {
         const tableRows = document.querySelectorAll("#table tbody tr");
-        const lastRow = tableRows[tableRows.length - 1]; // Берем последнюю строку (самую новую)
-        const cell = lastRow.querySelectorAll("td")[3]; // Предполагаем, что статус хранят в 4-м столбце
-        const status = cell.textContent.trim() === "Попадание"; // Проверяем текст попадания
-        drawPoint(xValue, yValue, rValue, status); // Рисуем точку
-    }, 300); // Задержка осталась минимальной на случай асинхронности
+        const lastRow = tableRows[tableRows.length - 1];
+        const cell = lastRow.querySelectorAll("td")[3];
+        const status = cell.textContent.trim() === "Попадание";
+        drawPoint(xValue, yValue, rValue, status);
+    }, 300);
 }
 
 function checkY(value) {
