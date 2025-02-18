@@ -50,14 +50,15 @@ public class PointBean {
     }
 
     public String submit() {
-        PointDTO pointDTO = new PointDTO(x, y, r, false); // Изначально статус попадания false
+        PointDTO pointDTO = new PointDTO(x, y, r, false);
 
+        // Проверяем попадание в область R
         if (pointService.validatePoint(pointDTO)) {
             boolean hit = pointService.isPointInArea(pointDTO);
-            pointDTO.setStatus(hit); // Устанавливаем статус попадания
+            pointDTO.setStatus(hit);
 
-            databaseService.addPoint(pointDTO); // Добавляем точку в БД
-            points = databaseService.getAllPoints(); // Обновляем список точек
+            databaseService.addPoint(pointDTO);
+            points = databaseService.getAllPoints();
         }
 
         return "success";

@@ -6,7 +6,6 @@
     <persistence-unit name="myApp" transaction-type="JTA">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <jta-data-source>java:/jdbc/PostgresDS</jta-data-source>
-        <class>models.Point</class>
         <properties>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>

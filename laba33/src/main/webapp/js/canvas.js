@@ -81,7 +81,11 @@ function drawPoint(xValue, yValue, rValue, status) {
 
     ctx.translate(canvas.width / 2, canvas.height / 2);
     ctx.arc(plotX, plotY, 5, 0, 2 * Math.PI);
-    ctx.fillStyle = status ? '#00FF00' : '#FF0000';
+    if (status) {
+            ctx.fillStyle = '#00FF00'; // Зеленая, если точка внутри области
+        } else {
+            ctx.fillStyle = '#FF0000'; // Красная, если точка вне области
+        }
     ctx.fill();
     ctx.resetTransform();
     ctx.closePath();

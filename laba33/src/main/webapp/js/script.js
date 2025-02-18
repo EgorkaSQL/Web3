@@ -1,7 +1,7 @@
 function validateForm() {
     const xSelection = document.querySelector('.xSelection input:checked');
     const yValue = parseFloat(document.querySelector('.ySelection').value);
-    const rValue = parseFloat(document.querySelector('.rSelection').value);
+    const rSelection = document.querySelector('.rSelection input:checked');
 
     if (!xSelection) {
         alert("Выберите значение X!");
@@ -18,6 +18,11 @@ function validateForm() {
         return false;
     }
 
+    if (!rSelection) {
+        alert("Выберите значение R!");
+        return false;
+    }
+    const rValue = parseFloat(rSelection.value);
     if (!checkR(rValue)) {
         alert("Значение R должно быть одним из: 1, 2, 3, 4, 5");
         return false;
@@ -33,9 +38,11 @@ document.querySelector(".ySelection").addEventListener("input", function (e) {
     }
 });
 
-document.querySelector('.rSelection').addEventListener('change', (event) => {
-    R = Number(event.target.value);
-    drawGraph();
+document.querySelectorAll('.rSelection input').forEach(radio => {
+    radio.addEventListener('change', (event) => {
+        R = Number(event.target.value);
+        drawGraph();
+    });
 });
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -45,14 +52,13 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 canvas.addEventListener('click', function (event) {
-    let rHTML = document.querySelector('.rSelection');
-    let selectedValue = rHTML.value;
-    if (!selectedValue || !checkR(parseFloat(selectedValue))) {
+    let rSelection = document.querySelector('.rSelection input:checked');
+    if (!rSelection || !checkR(parseFloat(rSelection.value))) {
         alert("Выберите радиус!");
         return;
     }
 
-    const rValue = parseFloat(selectedValue);
+    const rValue = parseFloat(rSelection.value);
     const rect = canvas.getBoundingClientRect();
     const xClick = event.clientX - rect.left;
     const yClick = event.clientY - rect.top;

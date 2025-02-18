@@ -16,22 +16,19 @@ public class DatabaseService {
     @Inject
     private PointMapper pointMapper;
 
-    // Используем @Transactional для управления транзакциями
     @Transactional
     public void addPoint(PointDTO pointDTO) {
         PointEntity pointEntity = pointMapper.toEntity(pointDTO);
-        entityManager.persist(pointEntity); // Здесь будет использоваться транзакция
+        entityManager.persist(pointEntity);
     }
 
     @Transactional
     public void clearPoints() {
-        // Удаляем все точки из базы
         entityManager.createQuery("DELETE FROM PointEntity p").executeUpdate();
     }
 
     public List<PointDTO> getAllPoints() {
         List<PointEntity> pointEntities = entityManager.createQuery("SELECT p FROM PointEntity p", PointEntity.class).getResultList();
-        // Преобразуем список сущностей в список DTO
         return pointEntities.stream()
                 .map(pointMapper::toDTO)
                 .collect(Collectors.toList());
