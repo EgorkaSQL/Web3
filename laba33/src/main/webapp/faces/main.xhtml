@@ -183,14 +183,14 @@
             background-color: #5c24d4;
         }
 
-        .rselection {
+        .rSelection {
             display: flex;
-            gap: 10px;
+            gap: 100px;
             flex-wrap: wrap;
         }
 
-        .rselection input[type="radio"] {
-            margin-right: 5px;
+        .rSelection input[type="radio"] {
+            margin-right: 10px;
         }
     </style>
 </h:head>
@@ -225,10 +225,10 @@
                             <p>Выберите R</p>
                             <h:selectOneRadio id="rSelection" value="#{pointBean.r}" styleClass="rSelection">
                                 <f:selectItem itemValue="1" itemLabel="1" />
+                                <f:selectItem itemValue="1.5" itemLabel="1.5" />
                                 <f:selectItem itemValue="2" itemLabel="2" />
+                                <f:selectItem itemValue="2.5" itemLabel="2.5" />
                                 <f:selectItem itemValue="3" itemLabel="3" />
-                                <f:selectItem itemValue="4" itemLabel="4" />
-                                <f:selectItem itemValue="5" itemLabel="5" />
                             </h:selectOneRadio>
                         </label>
 

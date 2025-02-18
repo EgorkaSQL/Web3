@@ -24,7 +24,7 @@ function validateForm() {
     }
     const rValue = parseFloat(rSelection.value);
     if (!checkR(rValue)) {
-        alert("Значение R должно быть одним из: 1, 2, 3, 4, 5");
+        alert("Значение R должно быть одним из: 1, 1.5, 2, 2.5, 3");
         return false;
     }
 
@@ -121,11 +121,11 @@ function processButtons() {
 function handleResult(xValue, yValue, rValue) {
     setTimeout(() => {
         const tableRows = document.querySelectorAll("#table tbody tr");
-        const lastRow = tableRows[0];
-        const cell = lastRow.querySelectorAll("td")[3];
-        const status = cell.textContent.trim() === "Попадание";
-        drawPoint(xValue, yValue, rValue, status);
-    }, 320);
+        const lastRow = tableRows[tableRows.length - 1]; // Берем последнюю строку (самую новую)
+        const cell = lastRow.querySelectorAll("td")[3]; // Предполагаем, что статус хранят в 4-м столбце
+        const status = cell.textContent.trim() === "Попадание"; // Проверяем текст попадания
+        drawPoint(xValue, yValue, rValue, status); // Рисуем точку
+    }, 300); // Задержка осталась минимальной на случай асинхронности
 }
 
 function checkY(value) {
@@ -133,7 +133,7 @@ function checkY(value) {
 }
 
 function checkR(value) {
-    return [1, 2, 3, 4, 5].includes(parseFloat(value));
+    return [1, 1.5, 2, 2.5, 3].includes(parseFloat(value));
 }
 
 function checkX(value) {

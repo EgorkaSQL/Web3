@@ -42,6 +42,6 @@ public class PointService {
     }
 
     private boolean checkR(double r) {
-        return r == 1 || r == 2 || r == 3 || r == 4 || r == 5;
+        return r == 1 || r == 1.5 || r == 2 || r == 2.5 || r == 3;
     }
 }
