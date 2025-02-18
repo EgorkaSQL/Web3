@@ -15,7 +15,7 @@ public class PointService {
 
     // Логика проверки попадания в треугольник
     private boolean checkTriangle(double x, double y, double r) {
-        return (x <= 0 && y <= 0 && y >= -x - r);
+        return (x >= 0 && y >= 0 && y <= -x + r/2);
     }
 
     // Логика проверки попадания в прямоугольник

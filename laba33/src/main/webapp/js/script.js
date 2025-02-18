@@ -47,7 +47,11 @@ document.querySelectorAll('.rSelection input').forEach(radio => {
 
 document.addEventListener("DOMContentLoaded", () => {
     const rSelectionElement = document.querySelector('.rSelection');
-    R = Number(rSelectionElement.value);
+
+    // Устанавливаем значение R по умолчанию, например, 1
+    R = Number(rSelectionElement.querySelector('input:checked')?.value || 1);
+
+    // Отображаем фигуры сразу при загрузке страницы
     drawGraph();
 });
 

@@ -38,11 +38,11 @@ function drawShapes() {
 
     // Треугольник
     ctx.beginPath();
-    ctx.moveTo(Xcanvas / 2, Ycanvas / 2);
-    ctx.lineTo(Xcanvas / 2 - scale, Ycanvas / 2);
-    ctx.lineTo(Xcanvas / 2, Ycanvas / 2 + scale);
-    ctx.closePath();
-    ctx.fill();
+        ctx.moveTo(Xcanvas / 2, Ycanvas / 2); // Центр (0, 0)
+        ctx.lineTo(Xcanvas / 2 + scale / 2, Ycanvas / 2); // (R/2, 0)
+        ctx.lineTo(Xcanvas / 2, Ycanvas / 2 - scale / 2); // (0, R/2)
+        ctx.closePath();
+        ctx.fill();
 }
 
 function drawLabels() {
